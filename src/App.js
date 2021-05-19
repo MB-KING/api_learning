@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Switch, BrowserRouter, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import CoronaReport from './App/Items/CoronaReport/CoronaReport.js'
+import CurrencyPriceChanges from './App/Items/CurrencyPriceChanges/CurrencyPriceChanges.js'
+import Meteorology from './App/Items/Meteorology/Meteorology.js'
+import Posts from './App/Items/Posts/Posts.js'
+
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <BrowserRouter>
+          <ul>
+            <li>
+              <Link to="CoronaReport">CoronaReport</Link>
+            </li>
+            <li>
+              <Link to="CurrencyPriceChanges">CurrencyPriceChanges</Link>
+            </li>
+            <li>
+              <Link to="CoronaReport">CoronaReport</Link>
+            </li>
+            <li>
+              <Link to="Posts">Posts</Link>
+            </li>
+          </ul>
+
+
+          <Switch>
+            <Route exact path={"/"} />
+            <Route path={"/CoronaReport"} component={CoronaReport} />
+            <Route path={"/CurrencyPriceChanges"} component={CurrencyPriceChanges} />
+            <Route path={"/Meteorology"} component={Meteorology} />
+            <Route path={"/Posts"} component={Posts} />
+          </Switch>
+
+
+
+        </BrowserRouter>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
