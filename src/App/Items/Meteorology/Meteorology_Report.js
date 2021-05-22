@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class CoronaReport extends Component {
+class Meteorology_Report extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     render() { 
-        return ( <p>CoronaReport</p> );
+        return ( <p>tetstiwihhixh</p> );
     }
 }
  
-export default CoronaReport;
+export default Meteorology_Report;
