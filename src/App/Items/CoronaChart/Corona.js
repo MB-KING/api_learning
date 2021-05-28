@@ -6,7 +6,7 @@ class Corona extends Component {
         this.state = {}
     }
     HandelClick = () => {
-        this.props.history.push('/Meteorology_Report')
+        this.props.history.push('/Corona_Report')
     }
     render() {
         return (

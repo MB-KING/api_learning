@@ -6,7 +6,7 @@ class Meteorology extends Component {
         this.state = {}
     }
     HandelClick = () => {
-        this.props.history.push('/CoronaReport_Report')
+        this.props.history.push('/Meteorology_Report')
     }
     render() {
         return (

@@ -19,9 +19,6 @@ class CurrencyPriceChanges extends Component {
         )
     }
     render() {
-        setInterval(() => {
-            console.log("hi")
-        }, 60000);
         return (
             <ul>
                 { this.state.Currencys.map(Currency => <li>{Currency.title}{Currency.p}</li>)}

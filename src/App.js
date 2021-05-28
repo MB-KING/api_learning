@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Switch, BrowserRouter, Route, Link } from "react-router-dom";
 
 
-import CoronaReport from './App/Items/CoronaReport/Corona.js'
-import CoronaReport_Report from './App/Items/CoronaReport/Corona_Report.js'
+import Corona from './App/Items/CoronaChart/Corona.js'
+import Corona_Report from './App/Items/CoronaChart/Corona_Report.js'
 
 import CurrencyPriceChanges from './App/Items/CurrencyPriceChanges/CurrencyPriceChanges.js'
 
@@ -31,7 +31,7 @@ class App extends Component {
               <Link to="CurrencyPriceChanges">CurrencyPriceChanges</Link>
             </li>
             <li>
-              <Link to="CoronaReport">CoronaReport</Link>
+              <Link to="Corona">CoronaReport</Link>
             </li>
             <li>
               <Link to="Posts">Posts</Link>
@@ -41,12 +41,12 @@ class App extends Component {
 
           <Switch>
             <Route exact path={"/"} />
-            <Route path={"/CoronaReport"} component={CoronaReport} />
+            <Route path={"/Corona"} component={Corona} />
             <Route path={"/CurrencyPriceChanges"} component={CurrencyPriceChanges} />
             <Route path={"/Meteorology"} component={Meteorology} />
             <Route path={"/Meteorology_Report"} component={Meteorology_Report} />
             <Route path={"/Posts"} component={Posts} />
-            <Route path={"/CoronaReport_Report"} component={CoronaReport_Report} />
+            <Route path={"/Corona_Report"} component={Corona_Report} />
             <Route path={"/Meteorology_Report"} component={Meteorology_Report} />
 
           </Switch>
