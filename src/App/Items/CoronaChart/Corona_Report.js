@@ -22,6 +22,7 @@ class Corona_Report extends Component {
         return (
             <ul>
                 { this.state.Corona_res.map(c => <li>{c.Deaths}</li>)}
+                <p>{this.props.Country}</p>
             </ul>
         )
     }

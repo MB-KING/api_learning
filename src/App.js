@@ -5,7 +5,7 @@ import { Switch, BrowserRouter, Route, Link } from "react-router-dom";
 import Corona from './App/Items/CoronaChart/Corona.js'
 import Corona_Report from './App/Items/CoronaChart/Corona_Report.js'
 
-import CurrencyPriceChanges from './App/Items/CurrencyPriceChanges/CurrencyPriceChanges.js'
+import CurrencyPriceChanges from './App/Items/CurrencyPrice/CurrencyPriceChanges.js'
 
 import Meteorology from './App/Items/Meteorology/Meteorology.js'
 import Meteorology_Report from './App/Items/Meteorology/Meteorology_Report.js'
