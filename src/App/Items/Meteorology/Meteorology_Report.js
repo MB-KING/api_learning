@@ -11,22 +11,27 @@ class Meteorology_Report extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://api.codebazan.ir/weather`)
+        axios.get(`/weather/?city=تهران`)
             .then(res => {
-                console.log(res);
-                const Meteorologys_res = res;
+                //console.log(res);
+                const Meteorologys_res = res.data.result;
                 this.setState({ Meteorologys_res });
-                console.log()
             }
-        )
+            )
+
     }
     render() {
+        console.log(this.state.Meteorologys_res)
         return (
             <ul>
-                { this.state.Meteorologys_res.map(Meteorology => <li>{Meteorology.title}{Meteorology.p}</li>)}
+                <li>{this.state.Meteorologys_res.استان}</li>
+                <li>{this.state.Meteorologys_res.دما}</li>
+                <li>{this.state.Meteorologys_res.سرعت$باد}</li>
+                <li>{this.state.Meteorologys_res.به$روز$رسانی}</li>
+        
             </ul>
         )
     }
 }
- 
+
 export default Meteorology_Report;
