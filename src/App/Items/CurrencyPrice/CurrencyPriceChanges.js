@@ -11,7 +11,7 @@ class CurrencyPriceChanges extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://api.accessban.com/v1/data/sana/json`)
+        axios.get(`https://api.accessban.com/v1/data/sana/json?limit=5`)
         .then(res => {
             const Currencys = res.data.sana.data;
             this.setState({ Currencys });
@@ -24,7 +24,7 @@ class CurrencyPriceChanges extends Component {
     render() {
         return (
             <ul>
-                { this.state.Currencys.map(Currency => <li key={Currency.title}>{Currency.title}{Currency.p}</li>)}
+                { this.state.Currencys.map(Currency => <li key={Currency.title}> نام ارز  :{Currency.title} قیمت :{Currency.p}</li>)}
             </ul>
         )
     }
