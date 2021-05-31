@@ -8,7 +8,10 @@ class Corona extends Component {
         }
     }
     HandelClick = () => {
-        this.props.history.push('/Corona_Report')
+        this.props.history.push({
+            pathname: '/Corona_Report',
+            state: { keshvar : this.state.Country }
+        })
     }
     HandelSubmit = (event) => {
         event.preventDefault()
@@ -22,7 +25,6 @@ class Corona extends Component {
     }
 
     render() {
-        console.log(this.state.Country)
         return (
             <form onSubmit={this.HandelSubmit}>
                 <input type="text" value={this.state.Country} onChange={this.HandelInputChange} />
@@ -33,5 +35,5 @@ class Corona extends Component {
         );
     }
 }
-
+export {}
 export  default Corona ;
