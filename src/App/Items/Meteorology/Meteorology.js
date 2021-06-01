@@ -10,7 +10,7 @@ class Meteorology extends Component {
     HandelClick = () => {
         this.props.history.push({
             pathname: '/Meteorology_Report',
-            state: { shahr: this.state.Country }
+            state: { city_push: this.state.Country }
         })
     }
     HandelSubmit = (event) => {

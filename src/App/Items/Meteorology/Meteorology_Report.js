@@ -11,7 +11,7 @@ class Meteorology_Report extends Component {
     }
 
     componentDidMount() {
-        axios.get(`/weather/?city=${this.props.location.state.shahr}`)
+        axios.get(`/weather/?city=${this.props.location.state.city_push}`)
             .then(res => {
                 //console.log(res);
                 const Meteorologys_res = res.data.result;
@@ -21,12 +21,12 @@ class Meteorology_Report extends Component {
 
     }
     render(props) {
-        console.log(this.state.Meteorologys_res)
+        //console.log(this.state.Meteorologys_res)
         return (
             <ul>
                 <li>{this.state.Meteorologys_res.استان}</li>
                 <li>{this.state.Meteorologys_res.دما}</li>
-                <li>{this.props.location.state.shahr}</li>
+                <li>{this.props.location.state.city_push}</li>
 
             </ul>
         )
