@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 
 
 class Corona_Report extends Component {
@@ -24,7 +24,7 @@ class Corona_Report extends Component {
             .then(res => {
                 const Corona_res = res.data;
                 for (const dataObj of Corona_res ){
-                    empDate.push(parseFloat(dataObj.Date))
+                    empDate.push(String(dataObj.Date))
                     empDeaths.push(parseInt(dataObj.Deaths))
                 }
                 //console.log(empDate ,empDeaths);
@@ -59,7 +59,7 @@ class Corona_Report extends Component {
                     {this.state.Corona_res.map(c => <li key={c.id}>in date: {c.Date} deaths ={c.Deaths}</li>)}
                 </ul>
                 */}
-                <Line
+                <Bar
                     data={this.state.chartDate}
                     options={{
                         title: {
