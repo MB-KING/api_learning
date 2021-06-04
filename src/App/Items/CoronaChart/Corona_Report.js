@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Bar} from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 
 
 class Corona_Report extends Component {
@@ -59,7 +59,7 @@ class Corona_Report extends Component {
                     {this.state.Corona_res.map(c => <li key={c.id}>in date: {c.Date} deaths ={c.Deaths}</li>)}
                 </ul>
                 */}
-                <Bar
+                <Line
                     data={this.state.chartDate}
                     options={{
                         title: {
