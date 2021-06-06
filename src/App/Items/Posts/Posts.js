@@ -10,29 +10,32 @@ class Posts extends Component {
         this.state = {
             Categories: [],
             Posts: [],
+            Totalpages: '',
+            current_page: '',
             post_per_page: '5',
-            page: '2',
+            page: '1',
             input_Categorie: ''
         }
     }
-
     componentDidMount() {
 
-        axios.get(`http://digibazi-services.naringames.com:90/v1/categories`)
+        axios.get(`http://digibazi-services.naringames.com:90/v1/categories?per_page=500`)
             .then(res => {
                 const Categories = res.data.data;
                 this.setState({ Categories });
             }
-        );
+            );
         axios.get(`http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.post_per_page}&page=${this.state.page}`)
-        .then(res => {
-            const Posts = res.data.data;
-            this.setState({ Posts });
-            console.log(Posts)
+            .then(res => {
+                const Posts = res.data.data;
+                const meta = res.data.meta;
+                const Totalpages = meta.pagination.total_pages;
+                const current_page = meta.pagination.current_page;
+                this.setState({ Posts, Totalpages, current_page });
 
-            
-        }
-    )
+
+            }
+            )
 
 
     }
@@ -41,15 +44,18 @@ class Posts extends Component {
 
     }
     HandelClick = () => {
+
         axios.get(`http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.post_per_page}&page=${this.state.page}`)
             .then(res => {
                 const Posts = res.data.data;
-                this.setState({ Posts });
-                console.log(Posts)
+                const meta = res.data.meta;
+                const Totalpages = meta.pagination.total_pages;
+                const current_page = meta.pagination.current_page;
+                this.setState({ Posts, Totalpages, current_page });
 
-                
+
             }
-        )
+            )
 
     }
     HandelInputChange = (event) => {
@@ -64,7 +70,7 @@ class Posts extends Component {
             page: event.target.value,
 
         })
-
+        //console.log("page = " + this.state.page)
     }
     HandelInputChange2 = (event) => {
         this.setState({
@@ -74,11 +80,30 @@ class Posts extends Component {
 
     }
 
+    handlePageChange = (event) => {
+        console.log("page :" + event.target.innerText);
+        this.setState({
+            page: event.target.innerText,
+        });
+        axios.get(`http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.post_per_page}&page=${this.state.page}`)
+            .then(res => {
+                const Posts = res.data.data;
+                const meta = res.data.meta;
+                const Totalpages = meta.pagination.total_pages;
+                const current_page = meta.pagination.current_page;
+                this.setState({ Posts, Totalpages, current_page });
+
+
+            }
+            )
+
+    }
 
 
 
 
     render() {
+
         return (
             <React.Fragment>
                 <form onSubmit={this.HandelSubmit}>
@@ -100,22 +125,41 @@ class Posts extends Component {
                     <li>
                         <button type='submit' onClick={this.HandelClick} >send</button>
                     </li>
-
+                    {/*
                     <p>{this.state.post_per_page}</p>
                     <p>{this.state.page}</p>
                     <p>{this.state.input_Categorie}</p>
+                    */}
                 </form>
-                <Pagination value={this.state.page} onChange={this.HandelInputChange1}
-                count={10} 
-                page={this.state.page} 
+
+
+
+
+
+
+                <Pagination
+                    variant="outlined"
+
+                    onChange={this.handlePageChange}
+                    count={this.state.Totalpages}
+
+                    siblingCount={0}
+                    boundaryCount={10}
+                    page={this.state.page}
                 />
 
+
+
+
+
+
                 <ul>
-                {this.state.Posts.map(Post => <li key={Post.id}>
-                    <li>{Post.title}</li>
-                    <li>{Post.short_content}</li>
-                    <li><img src={Post.media[0].url} alt="post pic"/></li>
-                </li>)}
+                    {this.state.Posts.map(Post => <li key={Post.id}>
+                        <li>{Post.title}</li>
+                        <li>{Post.short_content}</li>
+
+                        <li><img src={Post.media[0].url} alt="post pic" /></li>
+                    </li>)}
 
                 </ul>
 
