@@ -1,5 +1,8 @@
+// import react pkg for react project 
 import React, { Component } from 'react';
+//import axios pkg for api call
 import axios from 'axios';
+//import chart.js pkg (line chart) for paint chart after give data
 import {Line} from 'react-chartjs-2';
 
 
@@ -13,13 +16,11 @@ class Corona_Report extends Component {
 
     }
 
-    componentDidMount(probs) {
-        //console.log("in app:" + this.props.location.state.date_from_push);
-        //console.log("in app:" + this.props.location.state.date_to_push);
+    componentDidMount() {
         const api_url = `https://api.covid19api.com/country/${this.props.location.state.Country_push}?from=${this.props.location.state.date_from_push}T00:00:00Z&to=${this.props.location.state.date_to_push}T00:00:00Z`
         const empDate = [];
         const empDeaths = [];
-        
+        //call corona api for give date and deaths 
         axios.get(api_url)
             .then(res => {
                 const Corona_res = res.data;
@@ -27,7 +28,7 @@ class Corona_Report extends Component {
                     empDate.push(String(dataObj.Date))
                     empDeaths.push(parseInt(dataObj.Deaths))
                 }
-                //console.log(empDate ,empDeaths);
+                //import date to the chartjs tag 
                 const chartDate = {
                     labels: empDate,
                     datasets: [
@@ -45,7 +46,7 @@ class Corona_Report extends Component {
                 this.setState({ Corona_res ,chartDate});
 
             }
-            )
+        )
         //console.log(api_url)
     }
     render() {
@@ -54,11 +55,7 @@ class Corona_Report extends Component {
         //console.log(this.props.location.state.date_to_push);
         return (
             <React.Fragment>
-                {/*
-                <ul>
-                    {this.state.Corona_res.map(c => <li key={c.id}>in date: {c.Date} deaths ={c.Deaths}</li>)}
-                </ul>
-                */}
+                {/* paint chart  */}
                 <Line
                     data={this.state.chartDate}
                     options={{
