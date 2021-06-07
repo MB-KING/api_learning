@@ -13,7 +13,7 @@ class Posts extends Component {
         this.state = {
             Categories: [],
             Posts: [],
-            Totalpages: '',
+            TotalPages: '',
             CurrentPage: '',
             PostPerPage: '5',
             page: '1',
@@ -35,20 +35,20 @@ class Posts extends Component {
             .then(res => {
                 const Posts = res.data.data;
                 const meta = res.data.meta;
-                const Totalpages = meta.pagination.total_pages;
+                const TotalPages = meta.pagination.total_pages;
                 const CurrentPage = meta.pagination.CurrentPage;
-                this.setState({ Posts, Totalpages, CurrentPage });
+                this.setState({ Posts, TotalPages, CurrentPage });
             }
         )
 
 
     }
-    //HandelSubmit = (event) => {
-    //    event.preventDefault()
-    //}
-    //HandelClick = () => {
-    //    this.componentDidMount();
-    //}
+    HandelSubmit = (event) => {
+        event.preventDefault()
+    }
+    HandelClick = () => {
+        this.componentDidMount();
+    }
 
 
     //set user input to the PostPerPage in the state
@@ -80,10 +80,12 @@ class Posts extends Component {
     }
     
     render() {
+        console.log("total pages : "+this.state.TotalPages)
+        console.log("page : "+this.state.page)
         return (
             <React.Fragment>
                 {/* give input form user  */}
-                <form /*onSubmit={this.HandelSubmit} */ >
+                <form onSubmit={this.HandelSubmit}  >
                     <li>
                         <label htmlFor="">post per page :</label>
                         <input type="text" value={this.state.PostPerPage} onChange={this.HandelInputChange} />
@@ -98,27 +100,29 @@ class Posts extends Component {
                             {this.state.Categories.map(Categorie => <option value={Categorie.name}>{Categorie.name}</option>)}
                         </select>
                     </li>
+                */}
                     <li>
                         <button type='submit' onClick={this.HandelClick} >send</button>
                     </li>
-                */}
                 </form>
                 
                 {/* pagination by material ui pkg  */}
                 <Pagination
                     variant="outlined"
                     onChange={this.handlePageChange}
-                    count={this.state.Totalpages}
-                    page={this.state.page}
+                    count={this.state.TotalPages}
+                    page={parseInt(this.state.page)}
+                    defaultPage={parseInt(this.state.page)} 
+                    boundaryCount={2}
                 />
 
                 {/* show posts */}
                 <ul>
                     {this.state.Posts.map(Post =>
                         <ul key={Post.id}>
-                            <li>{Post.title}</li>
-                            <li>{Post.short_content}</li>
-                            <li><img src={Post.media[0].url} alt="post pic" /></li>
+                            <li key={Post.id}>{Post.title}</li>
+                            <li key={Post.id}>{Post.short_content}</li>
+                            <li key={Post.id}><img src={Post.media[0].url} alt="post pic" /></li>
                         </ul>
                     )}
                 </ul>
