@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 //import axios pkg for api call
 import axios from 'axios';
-//import material ul pkg (lab/pagination0) for pagination posts 
+//import material ul pkg (lab/pagination) for pagination posts 
 import Pagination from '@material-ui/lab/Pagination';
 
 
@@ -20,6 +20,21 @@ class Posts extends Component {
             input_Categorie: ''
         }
     }
+    apicall (page){
+        
+        const ApiUrl = `http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.PostPerPage}&page=${page}`
+        console.log(ApiUrl)
+        axios.get(ApiUrl)
+            .then(res => {
+                const Posts = res.data.data;
+                const meta = res.data.meta;
+                const TotalPages = meta.pagination.total_pages;
+                const CurrentPage = meta.pagination.CurrentPage;
+                this.setState({ Posts, TotalPages, CurrentPage });
+            }
+        )
+
+    }
     componentDidMount() {
 
         //axios.get(`http://digibazi-services.naringames.com:90/v1/categories?per_page=500`)
@@ -31,24 +46,18 @@ class Posts extends Component {
 
 
         //call post api for give posts as digibazi api 
-        axios.get(`http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.PostPerPage}&page=${this.state.page}`)
-            .then(res => {
-                const Posts = res.data.data;
-                const meta = res.data.meta;
-                const TotalPages = meta.pagination.total_pages;
-                const CurrentPage = meta.pagination.CurrentPage;
-                this.setState({ Posts, TotalPages, CurrentPage });
-            }
-        )
-
+        this.apicall ()
 
     }
+    
     HandelSubmit = (event) => {
         event.preventDefault()
+        this.apicall ()
+
     }
-    HandelClick = () => {
-        this.componentDidMount();
-    }
+    //HandelClick = () => {
+        //this.apicall ()
+    //}
 
 
     //set user input to the PostPerPage in the state
@@ -73,13 +82,25 @@ class Posts extends Component {
 
     //set the pagination value to the page in the state and call api 
     handlePageChange = (event) => {
+        event.preventDefault()
+
+        console.log("----------------------------")
+        console.log('event :'+event.target.innerText,)
+        console.log('page in event :'+this.state.page,)
+        
         this.setState({
             page: event.target.innerText,
         });
-        this.componentDidMount()
+
+
+
+        this.apicall (parseInt(event.target.innerText))
     }
     
     render() {
+        console.log('page in event after set state :'+this.state.page,)
+
+
         console.log("total pages : "+this.state.TotalPages)
         console.log("page : "+this.state.page)
         return (
@@ -110,7 +131,7 @@ class Posts extends Component {
                 <Pagination
                     variant="outlined"
                     onChange={this.handlePageChange}
-                    count={this.state.TotalPages}
+                    count={parseInt(this.state.TotalPages)}
                     page={parseInt(this.state.page)}
                     defaultPage={parseInt(this.state.page)} 
                     boundaryCount={2}
