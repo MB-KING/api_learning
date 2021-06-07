@@ -1,3 +1,4 @@
+// import react pkg for react project 
 import React, { Component } from 'react';
 
 class Meteorology extends Component {
@@ -7,16 +8,22 @@ class Meteorology extends Component {
             Country: ''
         }
     }
+    //push data and user to the meteorology report page 
+
     HandelClick = () => {
         this.props.history.push({
             pathname: '/Meteorology_Report',
             state: { city_push: this.state.Country }
         })
     }
+    // set prevent to defullt for not refreshing page in submit 
+
     HandelSubmit = (event) => {
         event.preventDefault()
 
     }
+    // put countery name to state 
+
     HandelInputChange = (event) => {
         this.setState({
             Country: event.target.value
@@ -26,12 +33,15 @@ class Meteorology extends Component {
 
     render() {
         return (
-            <form onSubmit={this.HandelSubmit}>
-                <input type="text" value={this.state.Country} onChange={this.HandelInputChange} />
-                <button type='submit' onClick={this.HandelClick} >send</button>
-                <p>{this.state.Country}</p>
-            </form>
+            <React.Fragment>
+                {/* form from give input as user  */}
+                <form onSubmit={this.HandelSubmit}>
+                    <input type="text" value={this.state.Country} onChange={this.HandelInputChange} />
+                    <button type='submit' onClick={this.HandelClick} >send</button>
+                    <p>{this.state.Country}</p>
+                </form>
 
+            </React.Fragment>
         );
     }
 }

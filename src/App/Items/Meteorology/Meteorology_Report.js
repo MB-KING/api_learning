@@ -1,4 +1,8 @@
+// import react pkg for react project 
+
 import React, { Component } from 'react';
+//import axios pkg for api call
+
 import axios from 'axios';
 
 class Meteorology_Report extends Component {
@@ -9,8 +13,10 @@ class Meteorology_Report extends Component {
 
         }
     }
+    //for fix the api call (cors err) set the proxy in the package,json file 
 
     componentDidMount() {
+        //call api for give meteorology data 
         axios.get(`/weather/?city=${this.props.location.state.city_push}`)
             .then(res => {
                 //console.log(res);
@@ -20,15 +26,18 @@ class Meteorology_Report extends Component {
             )
 
     }
-    render(props) {
+    render() {
         //console.log(this.state.Meteorologys_res)
         return (
-            <ul>
-                <li>{this.state.Meteorologys_res.استان}</li>
-                <li>{this.state.Meteorologys_res.دما}</li>
-                <li>{this.props.location.state.city_push}</li>
+            <React.Fragment>
+                {/*show api data in the page  */}
+                <ul>
+                    <li>{this.state.Meteorologys_res.استان}</li>
+                    <li>{this.state.Meteorologys_res.دما}</li>
+                    <li>{this.props.location.state.city_push}</li>
 
-            </ul>
+                </ul>
+            </React.Fragment>
         )
     }
 }
