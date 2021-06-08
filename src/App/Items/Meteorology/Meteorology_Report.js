@@ -32,9 +32,9 @@ class Meteorology_Report extends Component {
             <React.Fragment>
                 {/*show api data in the page  */}
                 <ul>
-                    <li>{this.props.location.state.CityInput}</li>
-                    <li>{this.state.MeteorologysResponse.استان}</li>
-                    <li>{this.state.MeteorologysResponse.دما}</li>
+                    <li>city name : {this.props.location.state.CityInput}</li>
+                    <li>State name : {this.state.MeteorologysResponse.استان}</li>
+                    <li>Temperature : {this.state.MeteorologysResponse.دما}</li>
 
                 </ul>
             </React.Fragment>

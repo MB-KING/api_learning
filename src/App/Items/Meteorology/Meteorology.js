@@ -36,9 +36,9 @@ class Meteorology extends Component {
             <React.Fragment>
                 {/* form from give input as user  */}
                 <form onSubmit={this.HandelSubmit}>
+                    <label >city name (فارسی):</label>
                     <input type="text" value={this.state.Citys} onChange={this.HandelInputChange} />
                     <button type='submit' onClick={this.HandelClick} >send</button>
-                    <p>{this.state.Citys}</p>
                 </form>
 
             </React.Fragment>
