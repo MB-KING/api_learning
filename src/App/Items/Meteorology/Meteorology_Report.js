@@ -9,7 +9,7 @@ class Meteorology_Report extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Meteorologys_res: []
+            MeteorologysResponse: []
 
         }
     }
@@ -17,24 +17,24 @@ class Meteorology_Report extends Component {
 
     componentDidMount() {
         //call api for give meteorology data 
-        axios.get(`/weather/?city=${this.props.location.state.city_push}`)
+        axios.get(`/weather/?city=${this.props.location.state.CityInput}`)
             .then(res => {
                 //console.log(res);
-                const Meteorologys_res = res.data.result;
-                this.setState({ Meteorologys_res });
+                const MeteorologysResponse = res.data.result;
+                this.setState({ MeteorologysResponse });
             }
             )
 
     }
     render() {
-        //console.log(this.state.Meteorologys_res)
+        //console.log(this.state.MeteorologysResponse)
         return (
             <React.Fragment>
                 {/*show api data in the page  */}
                 <ul>
-                    <li>{this.state.Meteorologys_res.استان}</li>
-                    <li>{this.state.Meteorologys_res.دما}</li>
-                    <li>{this.props.location.state.city_push}</li>
+                    <li>{this.props.location.state.CityInput}</li>
+                    <li>{this.state.MeteorologysResponse.استان}</li>
+                    <li>{this.state.MeteorologysResponse.دما}</li>
 
                 </ul>
             </React.Fragment>

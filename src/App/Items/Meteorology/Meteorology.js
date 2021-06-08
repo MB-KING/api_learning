@@ -5,7 +5,7 @@ class Meteorology extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Country: ''
+            Citys: ''
         }
     }
     //push data and user to the meteorology report page 
@@ -13,7 +13,7 @@ class Meteorology extends Component {
     HandelClick = () => {
         this.props.history.push({
             pathname: '/Meteorology_Report',
-            state: { city_push: this.state.Country }
+            state: { CityInput: this.state.Citys }
         })
     }
     // set prevent to defullt for not refreshing page in submit 
@@ -26,7 +26,7 @@ class Meteorology extends Component {
 
     HandelInputChange = (event) => {
         this.setState({
-            Country: event.target.value
+            Citys: event.target.value
         })
 
     }
@@ -36,9 +36,9 @@ class Meteorology extends Component {
             <React.Fragment>
                 {/* form from give input as user  */}
                 <form onSubmit={this.HandelSubmit}>
-                    <input type="text" value={this.state.Country} onChange={this.HandelInputChange} />
+                    <input type="text" value={this.state.Citys} onChange={this.HandelInputChange} />
                     <button type='submit' onClick={this.HandelClick} >send</button>
-                    <p>{this.state.Country}</p>
+                    <p>{this.state.Citys}</p>
                 </form>
 
             </React.Fragment>
