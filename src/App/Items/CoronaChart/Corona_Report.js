@@ -34,7 +34,7 @@ class Corona_Report extends Component {
                     datasets: [
                         {
                             label: 'Rainfall',
-                            fill: false,
+                            fill: true,
                             lineTension: 0.5,
                             backgroundColor: 'rgba(75,192,192,1)',
                             borderColor: 'rgba(0,0,0,1)',
@@ -61,7 +61,6 @@ class Corona_Report extends Component {
                     options={{
                         title: {
                             display: true,
-                            text: 'Average Rainfall per month',
                             fontSize: 20
                         },
                         legend: {
