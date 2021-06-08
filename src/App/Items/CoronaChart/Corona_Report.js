@@ -10,8 +10,8 @@ class Corona_Report extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Corona_res: [],
-            chartDate : ''
+            CoronaResponse: [],
+            ChartDate : ''
         }
 
     }
@@ -23,13 +23,13 @@ class Corona_Report extends Component {
         //call corona api for give date and deaths 
         axios.get(api_url)
             .then(res => {
-                const Corona_res = res.data;
-                for (const dataObj of Corona_res ){
+                const CoronaResponse = res.data;
+                for (const dataObj of CoronaResponse ){
                     empDate.push(String(dataObj.Date))
                     empDeaths.push(parseInt(dataObj.Deaths))
                 }
                 //import date to the chartjs tag 
-                const chartDate = {
+                const ChartDate = {
                     labels: empDate,
                     datasets: [
                         {
@@ -43,7 +43,7 @@ class Corona_Report extends Component {
                         }
                     ]
                 }
-                this.setState({ Corona_res ,chartDate});
+                this.setState({ CoronaResponse ,ChartDate});
 
             }
         )
@@ -57,7 +57,7 @@ class Corona_Report extends Component {
             <React.Fragment>
                 {/* paint chart  */}
                 <Line
-                    data={this.state.chartDate}
+                    data={this.state.ChartDate}
                     options={{
                         title: {
                             display: true,

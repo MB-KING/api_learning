@@ -6,8 +6,8 @@ class Corona extends Component {
         super(props);
         this.state = {
             Country: 'iran',
-            date_from: '2020-05-01',
-            date_to: '2020-05-30'
+            DateFrom: '2020-05-01',
+            DateTo: '2020-05-30'
         }
     }
     //push data and user to the corona report page 
@@ -16,8 +16,8 @@ class Corona extends Component {
             pathname: '/Corona_Report',
             state: {
                 Country_push: this.state.Country,
-                date_from_push: this.state.date_from,
-                date_to_push: this.state.date_to
+                date_from_push: this.state.DateFrom,
+                date_to_push: this.state.DateTo
             }
         })
     }
@@ -27,7 +27,7 @@ class Corona extends Component {
 
     }
     // put countery name to state 
-    HandelInputChange = (event) => {
+    HandelCountryInputChange = (event) => {
         this.setState({
             Country: event.target.value,
 
@@ -36,17 +36,17 @@ class Corona extends Component {
     }
     //put data from in the state
 
-    HandelInputChange1 = (event) => {
+    HandelDateFromInputChange = (event) => {
         this.setState({
-            date_from: event.target.value,
+            DateFrom: event.target.value,
 
         })
 
     }
     //put data to in the state
-    HandelInputChange2 = (event) => {
+    HandelDateToInputChange = (event) => {
         this.setState({
-            date_to: event.target.value
+            DateTo: event.target.value
 
         })
 
@@ -59,23 +59,22 @@ class Corona extends Component {
                 <form onSubmit={this.HandelSubmit}>
                     <li>
                         <label htmlFor="">name:</label>
-                        <input type="text" value={this.state.Country} onChange={this.HandelInputChange} />
+                        <input type="text" value={this.state.Country} onChange={this.HandelCountryInputChange} />
                     </li>
                     <li>
                         <label htmlFor="">date from :</label>
 
-                        <input type="text" value={this.state.date_from} onChange={this.HandelInputChange1} />
+                        <input type="text" value={this.state.DateFrom} onChange={this.HandelDateFromInputChange} />
                     </li>
                     <li>
                         <label htmlFor="">date to :</label>
 
-                        <input type="text" value={this.state.date_to} onChange={this.HandelInputChange2} />
+                        <input type="text" value={this.state.DateTo} onChange={this.HandelDateToInputChange} />
                     </li>
                     <li>
 
                         <button type='submit' onClick={this.HandelClick} >send</button>
                     </li>
-                    <p>{this.state.Country}</p>
                 </form>
             </React.Fragment>
         );
