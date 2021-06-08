@@ -11,26 +11,23 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Categories: [],
+            //Categories: [],
             Posts: [],
             TotalPages: '',
-            CurrentPage: '',
             PostPerPage: '5',
-            page: '1',
-            input_Categorie: ''
+            Page: '1',
+            //InputCategorie: ''
         }
     }
-    apicall (page){
-        
-        const ApiUrl = `http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.PostPerPage}&page=${page}`
-        console.log(ApiUrl)
+    PostApiCall(Page) {
+
+        const ApiUrl = `http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.PostPerPage}&page=${Page}`
         axios.get(ApiUrl)
             .then(res => {
                 const Posts = res.data.data;
                 const meta = res.data.meta;
                 const TotalPages = meta.pagination.total_pages;
-                const CurrentPage = meta.pagination.CurrentPage;
-                this.setState({ Posts, TotalPages, CurrentPage });
+                this.setState({ Posts, TotalPages });
             }
         )
 
@@ -46,17 +43,17 @@ class Posts extends Component {
 
 
         //call post api for give posts as digibazi api 
-        this.apicall ()
+        this.PostApiCall()
 
     }
-    
+
     HandelSubmit = (event) => {
         event.preventDefault()
-        this.apicall ()
+        this.PostApiCall()
 
     }
     //HandelClick = () => {
-        //this.apicall ()
+    //this.PostApiCall ()
     //}
 
 
@@ -75,34 +72,20 @@ class Posts extends Component {
     //}
     //HandelInputChange2 = (event) => {
     //    this.setState({
-    //        input_Categorie: event.target.value,
+    //        InputCategorie: event.target.value,
     //    })
     //}
 
 
     //set the pagination value to the page in the state and call api 
     handlePageChange = (event) => {
-        event.preventDefault()
-
-        console.log("----------------------------")
-        console.log('event :'+event.target.innerText,)
-        console.log('page in event :'+this.state.page,)
-        
         this.setState({
-            page: event.target.innerText,
+            Page: event.target.innerText,
         });
-
-
-
-        this.apicall (parseInt(event.target.innerText))
+        this.PostApiCall(parseInt(event.target.innerText))
     }
-    
+
     render() {
-        console.log('page in event after set state :'+this.state.page,)
-
-
-        console.log("total pages : "+this.state.TotalPages)
-        console.log("page : "+this.state.page)
         return (
             <React.Fragment>
                 {/* give input form user  */}
@@ -111,7 +94,7 @@ class Posts extends Component {
                         <label htmlFor="">post per page :</label>
                         <input type="text" value={this.state.PostPerPage} onChange={this.HandelInputChange} />
                     </li>
-                {/*
+                    {/*
                     <li>
                         <label htmlFor="">page :</label>
                         <input type="text" value={this.state.page} onChange={this.HandelInputChange1} />
@@ -126,15 +109,15 @@ class Posts extends Component {
                         <button type='submit' onClick={this.HandelClick} >send</button>
                     </li>
                 </form>
-                
+
                 {/* pagination by material ui pkg  */}
                 <Pagination
                     variant="outlined"
                     onChange={this.handlePageChange}
                     count={parseInt(this.state.TotalPages)}
-                    page={parseInt(this.state.page)}
-                    defaultPage={parseInt(this.state.page)} 
-                    boundaryCount={2}
+                    Page={parseInt(this.state.Page)}
+                    defaultPage={parseInt(this.state.Page)}
+                    boundaryCount={5}
                 />
 
                 {/* show posts */}
