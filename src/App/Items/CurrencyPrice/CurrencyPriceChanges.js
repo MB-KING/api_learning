@@ -11,8 +11,7 @@ class CurrencyPriceChanges extends Component {
 
         }
     }
-
-    componentDidMount() {
+    ApiCall() {
         //call api from sana for give 5 price of currency
         axios.get(`https://api.accessban.com/v1/data/sana/json?limit=5`)
             .then(res => {
@@ -20,11 +19,16 @@ class CurrencyPriceChanges extends Component {
                 this.setState({ Currencys });
             }
             )
+
+    }
+    componentDidMount() {
+        this.ApiCall()
         //use interval refreshing all 60 secend
         setInterval(() => {
-            axios.get()
+            this.ApiCall()
         }, 60000);
     }
+
     render() {
         return (
             <React.Fragment>
