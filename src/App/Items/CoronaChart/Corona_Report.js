@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 //import chart.js pkg (line chart) for paint chart after give data
 import {Line} from 'react-chartjs-2';
+//import alertify for error 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 
 class Corona_Report extends Component {
@@ -45,7 +48,11 @@ class Corona_Report extends Component {
                 }
                 this.setState({ CoronaResponse ,ChartDate});
 
+            })
+            .catch(err => {
+                alertify.alert('Error', "error text : " + err);
             }
+
         )
         //console.log(api_url)
     }

@@ -5,6 +5,10 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
+//import alertify for error 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+
 class Meteorology_Report extends Component {
     constructor(props) {
         super(props);
@@ -22,8 +26,12 @@ class Meteorology_Report extends Component {
                 //console.log(res);
                 const MeteorologysResponse = res.data.result;
                 this.setState({ MeteorologysResponse });
+            })
+            .catch(err => {
+                alertify.alert('Error', "error text : " + err);
             }
-            )
+
+        )
 
     }
     render() {

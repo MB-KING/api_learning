@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 //import axios pkg for api call
 import axios from 'axios';
+//import alertify for error 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 class CurrencyPriceChanges extends Component {
     constructor(props) {
@@ -19,8 +22,12 @@ class CurrencyPriceChanges extends Component {
             .then(res => {
                 const Currencys = res.data.sana.data;
                 this.setState({ Currencys });
+            })
+            .catch(err => {
+                alertify.alert('Error', "error text : " + err);
             }
-            )
+
+        )
 
     }
     componentDidMount() {
@@ -29,7 +36,7 @@ class CurrencyPriceChanges extends Component {
     }
     IntervalApi = setInterval(() => {
         this.ApiCall()
-    }, 1000);
+    }, 60000);
 
     componentWillUnmount() {
         clearInterval(this.IntervalApi)

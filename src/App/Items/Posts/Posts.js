@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 //import material ul pkg (lab/pagination) for pagination posts 
 import Pagination from '@material-ui/lab/Pagination';
-
+//import alertify for error 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 
 
 class Posts extends Component {
@@ -28,6 +30,9 @@ class Posts extends Component {
                 const meta = res.data.meta;
                 const TotalPages = meta.pagination.total_pages;
                 this.setState({ Posts, TotalPages });
+            })
+            .catch(err => {
+                alertify.alert('Error',"error text : "+err);
             }
         )
 
