@@ -26,9 +26,12 @@ class Meteorology_Report extends Component {
                 //console.log(res);
                 const MeteorologysResponse = res.data.result;
                 this.setState({ MeteorologysResponse });
+                if (this.state.MeteorologysResponse.استان === null){
+                    alertify.alert('Error', "error text : " +this.state.MeteorologysResponse.شهر);
+                }
             })
             .catch(err => {
-                alertify.alert('Error', "error text : " + err);
+                alertify.alert('Error', "error text : " +this.state.MeteorologysResponse.شهر);
             }
 
         )
@@ -41,7 +44,7 @@ class Meteorology_Report extends Component {
                 {/*show api data in the page  */}
                 <ul>
                     <li>city name : {this.props.location.state.CityInput}</li>
-                    <li>State name : {this.state.MeteorologysResponse.استان}</li>
+                    <li>State name : {this.state.MeteorologysResponse.شهر}</li>
                     <li>Temperature : {this.state.MeteorologysResponse.دما}</li>
 
                 </ul>
