@@ -50,7 +50,9 @@ class Corona_Report extends Component {
 
             })
             .catch(err => {
-                alertify.alert('Error', "error text : " + err);
+                const error = err.response;
+                console.log(error.data.message)
+                alertify.alert('Error',  "error : "+ error.data.message);
             }
 
         )

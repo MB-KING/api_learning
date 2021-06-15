@@ -26,13 +26,27 @@ class Posts extends Component {
         const ApiUrl = `http://digibazi-services.naringames.com:90/v1/posts?per_page=${this.state.PostPerPage}&page=${Page}`
         axios.get(ApiUrl)
             .then(res => {
+                //console.log(res)
                 const Posts = res.data.data;
                 const meta = res.data.meta;
                 const TotalPages = meta.pagination.total_pages;
                 this.setState({ Posts, TotalPages });
             })
             .catch(err => {
-                alertify.alert('Error',"error text : "+err);
+                const error = err.response;
+                console.log(error.data)
+                //console.log(error.data.error.per_page)
+
+                if (error.data.code === 422){
+                    alertify.alert('Error' , "error : " + error.data.error.per_page);
+                }
+                else if(error.data.message === "Server Error"){
+                    alertify.alert('Error' , "error : " + error.data.message);
+                }
+                else{
+                    alertify.alert('Error' , "error : " + err.message);
+                }
+
             }
         )
 
@@ -117,6 +131,7 @@ class Posts extends Component {
 
                 {/* pagination by material ui pkg  */}
                 <Pagination
+                    value={parseInt(this.state.Page)}
                     variant="outlined"
                     onChange={this.handlePageChange}
                     count={parseInt(this.state.TotalPages)}
@@ -128,11 +143,11 @@ class Posts extends Component {
                 {/* show posts */}
                 <ul>
                     {this.state.Posts.map(Post =>
-                        <ul key={Post.id}>
-                            <li key={Post.id}>{Post.title}</li>
-                            <li key={Post.id}>{Post.short_content}</li>
-                            <li key={Post.id}><img src={Post.media[0].url} alt="post pic" /></li>
-                        </ul>
+                        <li key={Post.id}>
+                            <p>{Post.title}</p>
+                            <p>{Post.short_content}</p>
+                            <p><img src={Post.media[0].url} alt="post pic" /></p>
+                        </li>
                     )}
                 </ul>
 
