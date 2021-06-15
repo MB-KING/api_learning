@@ -37,10 +37,10 @@ class Posts extends Component {
                 console.log(error.data)
                 //console.log(error.data.error.per_page)
 
-                if (error.data.code === 422){
+                if (error.status === 422){
                     alertify.alert('Error' , "error : " + error.data.error.per_page);
                 }
-                else if(error.data.message === "Server Error"){
+                else if(error.status === 500){
                     alertify.alert('Error' , "error : " + error.data.message);
                 }
                 else{

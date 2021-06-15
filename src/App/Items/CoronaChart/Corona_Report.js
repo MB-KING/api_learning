@@ -51,8 +51,14 @@ class Corona_Report extends Component {
             })
             .catch(err => {
                 const error = err.response;
-                console.log(error.data.message)
-                alertify.alert('Error',  "error : "+ error.data.message);
+                //console.log(error.status)
+                if(error.status === 404 ){
+
+                    alertify.alert('Error',  "error : "+ error.data.message +" "+ error.status);
+                }
+                else{
+                    alertify.alert('Error',  "error : "+ err.message);
+                }
             }
 
         )
